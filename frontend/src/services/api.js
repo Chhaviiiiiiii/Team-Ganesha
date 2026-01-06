@@ -67,4 +67,13 @@ export const notificationsAPI = {
   delete: (id) => api.delete(`/notifications/${id}`)
 }
 
+// Public API (No authentication required)
+export const publicAPI = {
+  getZonesStatus: () => api.get('/public/zones-status'),
+  getSafetyAlerts: () => api.get('/public/safety-alerts'),
+  getHelpline: () => api.get('/public/helpline'),
+  getCrowdSummary: () => api.get('/public/crowd-summary'),
+  getHourlyDistribution: () => api.get('/public/hourly-distribution')
+}
+
 export default api

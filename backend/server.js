@@ -8,6 +8,7 @@ import alertsRoutes from './routes/alerts.js'
 import rfidRoutes from './routes/rfid.js'
 import authRoutes from './routes/auth.js'
 import notificationsRoutes from './routes/notifications.js'
+import publicRoutes from './routes/public.js'
 
 dotenv.config()
 
@@ -34,6 +35,7 @@ app.use('/api/alerts', alertsRoutes)
 app.use('/api/rfid', rfidRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/notifications', notificationsRoutes)
+app.use('/api/public', publicRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
