@@ -4,6 +4,8 @@ import OverviewPage from './views/OverviewPage'
 import AnalyticsView from './views/AnalyticsView'
 import AlertsView from './views/AlertsView'
 import UserPermissionsView from './views/UserPermissionsView'
+import HeatmapView from './views/HeatmapView'
+import RFIDRegistryView from './views/RFIDRegistryView'
 
 const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) => {
   const [dashboardData, setDashboardData] = useState(null)
@@ -36,11 +38,11 @@ const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) =
       case 'overview':
         return <OverviewPage setSelectedZone={setSelectedZone} />
       case 'heatmap':
-        return <div className="p-6 text-white">Live Heatmap View - Coming Soon</div>
+        return <HeatmapView />
       case 'alerts':
         return <AlertsView />
       case 'rfid':
-        return <div className="p-6 text-white">RFID Registry - Coming Soon</div>
+        return <RFIDRegistryView />
       case 'analytics':
         return <AnalyticsView />
       case 'settings':
@@ -62,6 +64,7 @@ const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) =
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          className={currentView === 'heatmap' ? 'h-full' : ''}
         >
           {renderView()}
         </motion.div>
