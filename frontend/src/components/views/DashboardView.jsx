@@ -13,15 +13,9 @@ const DashboardView = ({ data }) => {
     if (savedLayout) {
       setWidgetLayout(JSON.parse(savedLayout))
     } else {
-      // Default layout
+      // Default layout - no charts, only KPIs and activity
       setWidgetLayout([
-        { i: 'visitors', x: 0, y: 0, w: 3, h: 2, type: 'kpi' },
-        { i: 'zones', x: 3, y: 0, w: 3, h: 2, type: 'kpi' },
-        { i: 'alerts', x: 6, y: 0, w: 3, h: 2, type: 'kpi' },
-        { i: 'health', x: 9, y: 0, w: 3, h: 2, type: 'kpi' },
-        { i: 'chart1', x: 0, y: 2, w: 6, h: 4, type: 'chart' },
-        { i: 'chart2', x: 6, y: 2, w: 6, h: 4, type: 'chart' },
-        { i: 'activity', x: 0, y: 6, w: 12, h: 3, type: 'list' },
+        { i: 'activity', x: 0, y: 0, w: 12, h: 4, type: 'list' },
       ])
     }
   }, [])

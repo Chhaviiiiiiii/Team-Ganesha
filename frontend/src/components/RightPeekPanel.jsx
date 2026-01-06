@@ -46,18 +46,18 @@ const RightPeekPanel = () => {
         onMouseLeave={() => setIsHovered(false)}
         className="fixed right-0 top-0 h-full w-80 z-50"
       >
-        <div className="h-full glass-panel m-4 p-6 overflow-y-auto">
+        <div className="h-full bg-gradient-to-bl from-blue-100 via-cyan-50 to-purple-100 backdrop-blur-2xl border-l-4 border-blue-200 m-4 p-6 overflow-y-auto rounded-2xl shadow-2xl">
           {/* Today's Highlights */}
           <div className="mb-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Today's Highlights</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Today's Highlights</h3>
             <div className="space-y-3">
               {todayHighlights.map((item, idx) => (
-                <div key={idx} className="glass-panel p-4 flex items-center justify-between">
+                <div key={idx} className="bg-white/80 backdrop-blur-xl border border-gray-200 rounded-xl p-4 flex items-center justify-between shadow-sm">
                   <div className="flex items-center gap-3">
-                    <item.icon className="w-5 h-5 text-blue-400" />
-                    <span className="text-sm text-zinc-300">{item.label}</span>
+                    <item.icon className="w-5 h-5 text-blue-600" />
+                    <span className="text-sm text-gray-700">{item.label}</span>
                   </div>
-                  <span className="text-xl font-bold text-white">{item.value}</span>
+                  <span className="text-xl font-bold text-gray-900">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -66,11 +66,11 @@ const RightPeekPanel = () => {
           {/* Notifications */}
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-white">Notifications</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Notifications</h3>
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                className="w-2 h-2 rounded-full bg-green-400"
+                className="w-2 h-2 rounded-full bg-green-500"
               />
             </div>
             
@@ -81,21 +81,21 @@ const RightPeekPanel = () => {
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   whileHover={{ scale: 1.02 }}
-                  className={`glass-panel-hover p-3 cursor-pointer border-l-2 ${
-                    notif.priority === 'high' ? 'border-red-400' :
-                    notif.priority === 'medium' ? 'border-yellow-400' :
-                    'border-green-400'
+                  className={`bg-white/80 backdrop-blur-xl border border-gray-200 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow border-l-4 ${
+                    notif.priority === 'high' ? 'border-l-red-500' :
+                    notif.priority === 'medium' ? 'border-l-yellow-500' :
+                    'border-l-green-500'
                   }`}
                 >
                   <div className="flex items-start gap-3">
                     <notif.icon className={`w-4 h-4 mt-1 ${
-                      notif.priority === 'high' ? 'text-red-400' :
-                      notif.priority === 'medium' ? 'text-yellow-400' :
-                      'text-green-400'
+                      notif.priority === 'high' ? 'text-red-600' :
+                      notif.priority === 'medium' ? 'text-yellow-600' :
+                      'text-green-600'
                     }`} />
                     <div className="flex-1">
-                      <p className="text-sm text-white">{notif.message}</p>
-                      <span className="text-xs text-zinc-500">{notif.time}</span>
+                      <p className="text-sm text-gray-900">{notif.message}</p>
+                      <span className="text-xs text-gray-500">{notif.time}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -105,14 +105,14 @@ const RightPeekPanel = () => {
 
           {/* Quick Tools */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Quick Tools</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Tools</h3>
             <div className="grid grid-cols-2 gap-3">
               {quickTools.map((tool, idx) => (
                 <motion.button
                   key={idx}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`glass-panel-hover p-4 text-sm text-white font-medium bg-gradient-to-br from-${tool.color}-500/20 to-transparent`}
+                  className={`bg-white/80 backdrop-blur-xl border border-gray-200 rounded-xl p-4 text-sm text-gray-900 font-medium hover:shadow-md transition-shadow bg-gradient-to-br from-${tool.color}-50 to-transparent`}
                 >
                   {tool.name}
                 </motion.button>
@@ -121,12 +121,12 @@ const RightPeekPanel = () => {
           </div>
 
           {/* Daily Insight */}
-          <div className="mt-6 glass-panel p-4 bg-gradient-to-br from-purple-500/10 to-blue-500/10">
+          <div className="mt-6 bg-gradient-to-br from-purple-50 to-blue-50 border border-purple-200 rounded-xl p-4 shadow-sm">
             <div className="flex items-center gap-2 mb-2">
-              <Zap className="w-4 h-4 text-yellow-400" />
-              <span className="text-sm font-semibold text-white">Daily Insight</span>
+              <Zap className="w-4 h-4 text-yellow-600" />
+              <span className="text-sm font-semibold text-gray-900">Daily Insight</span>
             </div>
-            <p className="text-xs text-zinc-300">
+            <p className="text-xs text-gray-700">
               Visitor flow is 23% smoother today compared to last week. Great job team!
             </p>
           </div>
