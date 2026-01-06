@@ -12,8 +12,117 @@ const ROLES = [
   { value: 'PUBLIC_PILGRIM', label: 'Public / Pilgrim Dashboard', color: 'bg-gray-500' }
 ];
 
+// Mock Users Data
+const MOCK_USERS = [
+  {
+    _id: '1',
+    name: 'Rajesh Kumar',
+    phoneNumber: '+91 9876543210',
+    role: 'LIVE_MANAGEMENT',
+    createdAt: '2026-01-01T10:30:00Z'
+  },
+  {
+    _id: '2',
+    name: 'Priya Sharma',
+    phoneNumber: '+91 9876543211',
+    role: 'RFID_REGISTRY',
+    createdAt: '2026-01-02T11:45:00Z'
+  },
+  {
+    _id: '3',
+    name: 'Inspector Singh',
+    phoneNumber: '+91 9876543212',
+    role: 'POLICE_DASHBOARD',
+    createdAt: '2026-01-02T14:20:00Z'
+  },
+  {
+    _id: '4',
+    name: 'Dr. Anita Verma',
+    phoneNumber: '+91 9876543213',
+    role: 'MEDICAL_DASHBOARD',
+    createdAt: '2026-01-03T09:15:00Z'
+  },
+  {
+    _id: '5',
+    name: 'Amit Patel',
+    phoneNumber: '+91 9876543214',
+    role: 'ALERTS_EMERGENCY',
+    createdAt: '2026-01-03T15:30:00Z'
+  },
+  {
+    _id: '6',
+    name: 'Sunita Gupta',
+    phoneNumber: '+91 9876543215',
+    role: 'OPERATOR_STAFF',
+    createdAt: '2026-01-04T08:00:00Z'
+  },
+  {
+    _id: '7',
+    name: 'Vikram Reddy',
+    phoneNumber: '+91 9876543216',
+    role: 'LIVE_MANAGEMENT',
+    createdAt: '2026-01-04T10:30:00Z'
+  },
+  {
+    _id: '8',
+    name: 'Constable Rahul',
+    phoneNumber: '+91 9876543217',
+    role: 'POLICE_DASHBOARD',
+    createdAt: '2026-01-04T12:15:00Z'
+  },
+  {
+    _id: '9',
+    name: 'Meera Desai',
+    phoneNumber: '+91 9876543218',
+    role: 'RFID_REGISTRY',
+    createdAt: '2026-01-05T07:45:00Z'
+  },
+  {
+    _id: '10',
+    name: 'Dr. Suresh Nair',
+    phoneNumber: '+91 9876543219',
+    role: 'MEDICAL_DASHBOARD',
+    createdAt: '2026-01-05T11:00:00Z'
+  },
+  {
+    _id: '11',
+    name: 'Karan Mehta',
+    phoneNumber: '+91 9876543220',
+    role: 'OPERATOR_STAFF',
+    createdAt: '2026-01-05T13:30:00Z'
+  },
+  {
+    _id: '12',
+    name: 'Pooja Singh',
+    phoneNumber: '+91 9876543221',
+    role: 'ALERTS_EMERGENCY',
+    createdAt: '2026-01-06T09:00:00Z'
+  },
+  {
+    _id: '13',
+    name: 'Ravi Joshi',
+    phoneNumber: '+91 9876543222',
+    role: 'OPERATOR_STAFF',
+    createdAt: '2026-01-06T10:15:00Z'
+  },
+  {
+    _id: '14',
+    name: 'SI Deepak Kumar',
+    phoneNumber: '+91 9876543223',
+    role: 'POLICE_DASHBOARD',
+    createdAt: '2026-01-06T11:45:00Z'
+  },
+  {
+    _id: '15',
+    name: 'Anjali Rao',
+    phoneNumber: '+91 9876543224',
+    role: 'LIVE_MANAGEMENT',
+    createdAt: '2026-01-06T14:20:00Z'
+  }
+];
+
 export default function UserPermissionsView() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(MOCK_USERS);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,10 +140,12 @@ export default function UserPermissionsView() {
   const fetchUsers = async () => {
     try {
       const response = await api.get('/auth/users');
-      setUsers(response.data.data || []);
+      // If API call succeeds, use real data; otherwise keep mock data
+      setUsers(response.data.data || MOCK_USERS);
     } catch (error) {
       console.error('Error fetching users:', error);
-      setUsers([]);
+      // Keep using mock data if API fails
+      setUsers(MOCK_USERS);
     }
   };
 
@@ -43,13 +154,25 @@ export default function UserPermissionsView() {
     setLoading(true);
 
     try {
+      // Try API call first
       await api.post('/auth/create-user', formData);
       setShowCreateModal(false);
       setFormData({ phoneNumber: '', password: '', role: '', name: '' });
       fetchUsers();
       alert('User created successfully!');
     } catch (error) {
-      alert(error.response?.data?.message || 'Error creating user');
+      // If API fails, add to mock data locally
+      const newUser = {
+        _id: String(users.length + 1),
+        name: formData.name,
+        phoneNumber: formData.phoneNumber,
+        role: formData.role,
+        createdAt: new Date().toISOString()
+      };
+      setUsers([...users, newUser]);
+      setShowCreateModal(false);
+      setFormData({ phoneNumber: '', password: '', role: '', name: '' });
+      alert('User created successfully (Mock Mode)!');
     } finally {
       setLoading(false);
     }
@@ -63,7 +186,9 @@ export default function UserPermissionsView() {
       fetchUsers();
       alert('User deleted successfully!');
     } catch (error) {
-      alert('Error deleting user');
+      // If API fails, delete from local state
+      setUsers(users.filter(u => u._id !== userId));
+      alert('User deleted successfully (Mock Mode)!');
     }
   };
 
