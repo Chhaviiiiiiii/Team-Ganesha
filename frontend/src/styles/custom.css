@@ -71,18 +71,18 @@
 /* Neon glow effects */
 .neon-purple {
   text-shadow: 0 0 10px rgba(168, 85, 247, 0.8),
-               0 0 20px rgba(168, 85, 247, 0.6),
-               0 0 30px rgba(168, 85, 247, 0.4);
+    0 0 20px rgba(168, 85, 247, 0.6), 0 0 30px rgba(168, 85, 247, 0.4);
 }
 
 .neon-blue {
   text-shadow: 0 0 10px rgba(59, 130, 246, 0.8),
-               0 0 20px rgba(59, 130, 246, 0.6),
-               0 0 30px rgba(59, 130, 246, 0.4);
+    0 0 20px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4);
 }
 
 /* Smooth transitions for all interactive elements */
-button, a, .clickable {
+button,
+a,
+.clickable {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -123,7 +123,7 @@ button, a, .clickable {
 }
 
 .dock-reflection::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -100%;
   left: 0;
@@ -134,4 +134,222 @@ button, a, .clickable {
   transform: scaleY(-1);
   filter: blur(8px);
   pointer-events: none;
+}
+
+/* Police Dashboard Responsive Styles */
+@media (max-width: 1024px) {
+  /* Adjust grid layouts for tablets */
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  .lg\:col-span-2 {
+    grid-column: span 1 / span 1 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile optimizations */
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Reduce padding on mobile */
+  .max-w-screen-2xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Make stat cards stack vertically */
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Reduce font sizes */
+  .text-3xl {
+    font-size: 1.875rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem !important;
+  }
+
+  .text-xl {
+    font-size: 1.125rem !important;
+  }
+
+  /* Hide less important content on mobile */
+  .mobile-hide {
+    display: none !important;
+  }
+
+  /* Stack action buttons vertically on mobile */
+  .case-actions {
+    flex-direction: column !important;
+  }
+
+  .case-actions button {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Extra small devices */
+  .text-lg {
+    font-size: 1rem !important;
+  }
+
+  /* Reduce stat card sizes */
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Reduce padding further */
+  .p-6 {
+    padding: 1rem !important;
+  }
+
+  .p-5 {
+    padding: 0.875rem !important;
+  }
+
+  .p-4 {
+    padding: 0.75rem !important;
+  }
+
+  /* Make modals full screen on small devices */
+  .fixed.inset-0 > div {
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    height: 100vh !important;
+  }
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Slide in animation for notifications */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+/* Pulse animation delay */
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+/* Scrollbar styling for dashboards */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* Medical dashboard scrollbar - red theme */
+.medical-scroll::-webkit-scrollbar-thumb {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.medical-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(239, 68, 68, 0.5);
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Medical Dashboard specific animations */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Priority-based alert hierarchy for medical dashboard */
+.priority-critical {
+  border-left: 4px solid #ef4444;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.priority-high {
+  border-left: 4px solid #f97316;
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+}
+
+.priority-medium {
+  border-left: 4px solid #eab308;
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.15);
+}
+
+.priority-low {
+  border-left: 4px solid #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
 }
