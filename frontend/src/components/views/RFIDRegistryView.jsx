@@ -286,7 +286,7 @@ export default function RFIDRegistryView() {
             </button>
             
             {showFilterMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-gray-900 border border-white/20 rounded-lg shadow-2xl z-10">
+              <div className="absolute right-0 mt-2 w-48 bg-gray-900 border border-white/20 rounded-lg shadow-2xl z-50">
                 {['all', 'active', 'inactive', 'blocked'].map((status) => (
                   <button
                     key={status}
@@ -471,33 +471,7 @@ export default function RFIDRegistryView() {
             </div>
           )}
         </div>
-      )}    <td className="px-6 py-4 text-white">{rfid.assignedTo}</td>
-                <td className="px-6 py-4 text-gray-400">{rfid.lastZone}</td>
-                <td className="px-6 py-4 text-gray-400">{rfid.lastScan}</td>
-                <td className="px-6 py-4 text-white font-semibold">{rfid.totalScans}</td>
-                <td className="px-6 py-4">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedRFID(rfid);
-                    }}
-                    className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                  >
-                    View Details →
-                  </button>
-                </td>
-              </motion.tr>
-            ))}
-          </tbody>
-        </table>
-
-        {filteredList.length === 0 && (
-          <div className="text-center py-12">
-            <Radio className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400">No RFID records found</p>
-          </div>
-        )}
-      </div>
+      )}
 
       {/* Details Modal */}
       <AnimatePresence>
