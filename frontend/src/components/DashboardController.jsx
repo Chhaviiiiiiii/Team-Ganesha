@@ -6,6 +6,7 @@ import AlertsView from './views/AlertsView'
 import UserPermissionsView from './views/UserPermissionsView'
 import HeatmapView from './views/HeatmapView'
 import RFIDRegistryView from './views/RFIDRegistryView'
+import SystemSettingsView from './views/SystemSettingsView'
 
 const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) => {
   const [dashboardData, setDashboardData] = useState(null)
@@ -46,7 +47,7 @@ const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) =
       case 'analytics':
         return <AnalyticsView />
       case 'settings':
-        return <div className="p-6 text-white">System Settings - Coming Soon</div>
+        return <SystemSettingsView />
       case 'users':
         return <UserPermissionsView />
       default:
