@@ -140,8 +140,10 @@ export default function UserPermissionsView() {
   const fetchUsers = async () => {
     try {
       const response = await api.get('/auth/users');
-      // If API call succeeds, use real data; otherwise keep mock data
-      setUsers(response.data.data || MOCK_USERS);
+      const apiUsers = response.data.data || [];
+      // Use mock data merged with API data for demo purposes
+      const allUsers = [...MOCK_USERS, ...apiUsers];
+      setUsers(allUsers);
     } catch (error) {
       console.error('Error fetching users:', error);
       // Keep using mock data if API fails
