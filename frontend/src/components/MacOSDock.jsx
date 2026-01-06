@@ -51,7 +51,7 @@ const MacOSDock = ({ currentView, setCurrentView }) => {
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.5 }}
-        className="glass-panel px-4 py-3 flex items-end gap-2"
+        className="bg-gradient-to-r from-purple-100 via-pink-100 to-blue-100 backdrop-blur-2xl border-2 border-white/50 rounded-2xl shadow-2xl px-4 py-3 flex items-end gap-2"
         onMouseLeave={() => setHoveredIndex(null)}
       >
         {dockItems.map((item, index) => {
@@ -59,7 +59,7 @@ const MacOSDock = ({ currentView, setCurrentView }) => {
             return (
               <div
                 key={item.id}
-                className="w-px h-12 bg-white/20 mx-2"
+                className="w-px h-12 bg-gray-300 mx-2"
               />
             )
           }
@@ -89,43 +89,33 @@ const MacOSDock = ({ currentView, setCurrentView }) => {
                 }}
                 className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap"
               >
-                <div className="glass-panel px-3 py-1.5 text-xs text-white font-medium">
+                <div className="bg-gray-900 text-white px-3 py-1.5 text-xs font-medium rounded-lg shadow-lg">
                   {item.label}
                 </div>
               </motion.div>
 
               {/* Icon Container */}
               <div className={`
-                w-12 h-12 rounded-xl flex items-center justify-center
-                ${isActive ? 'bg-white/20 glow-effect' : 'bg-white/5'}
-                ${item.color === 'blue' && 'hover:bg-blue-500/30'}
-                ${item.color === 'purple' && 'hover:bg-purple-500/30'}
-                ${item.color === 'red' && 'hover:bg-red-500/30'}
-                ${item.color === 'green' && 'hover:bg-green-500/30'}
-                ${item.color === 'yellow' && 'hover:bg-yellow-500/30'}
-                ${item.color === 'pink' && 'hover:bg-pink-500/30'}
-                ${item.color === 'orange' && 'hover:bg-orange-500/30'}
-                ${item.color === 'gray' && 'hover:bg-gray-500/30'}
-                transition-colors
+                w-12 h-12 rounded-xl flex items-center justify-center shadow-lg
+                ${isActive ? 'shadow-xl ring-2 ring-white' : ''}
+                ${item.color === 'blue' && 'bg-gradient-to-br from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600'}
+                ${item.color === 'purple' && 'bg-gradient-to-br from-purple-400 to-pink-500 hover:from-purple-500 hover:to-pink-600'}
+                ${item.color === 'red' && 'bg-gradient-to-br from-red-400 to-orange-500 hover:from-red-500 hover:to-orange-600'}
+                ${item.color === 'green' && 'bg-gradient-to-br from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600'}
+                ${item.color === 'yellow' && 'bg-gradient-to-br from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600'}
+                ${item.color === 'pink' && 'bg-gradient-to-br from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600'}
+                ${item.color === 'orange' && 'bg-gradient-to-br from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600'}
+                ${item.color === 'gray' && 'bg-gradient-to-br from-gray-400 to-slate-500 hover:from-gray-500 hover:to-slate-600'}
+                transition-all
               `}>
-                <Icon className={`
-                  w-6 h-6
-                  ${item.color === 'blue' && 'text-blue-400'}
-                  ${item.color === 'purple' && 'text-purple-400'}
-                  ${item.color === 'red' && 'text-red-400'}
-                  ${item.color === 'green' && 'text-green-400'}
-                  ${item.color === 'yellow' && 'text-yellow-400'}
-                  ${item.color === 'pink' && 'text-pink-400'}
-                  ${item.color === 'orange' && 'text-orange-400'}
-                  ${item.color === 'gray' && 'text-gray-400'}
-                `} />
+                <Icon className="w-6 h-6 text-white drop-shadow-lg" />
               </div>
 
               {/* Active Indicator */}
               {isActive && (
                 <motion.div
                   layoutId="activeDockItem"
-                  className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white"
+                  className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-gray-900"
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}

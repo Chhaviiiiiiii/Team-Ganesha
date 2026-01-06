@@ -12,7 +12,7 @@ import notificationsRoutes from './routes/notifications.js'
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5001
 
 // Middleware
 app.use(cors())
@@ -20,10 +20,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kumbh-sava', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/kumbh-sava')
 .then(() => console.log('✅ MongoDB Connected'))
 .catch(err => console.error('❌ MongoDB Connection Error:', err))
 

@@ -35,12 +35,12 @@ const LeftPeekPanel = () => {
         onMouseLeave={() => setIsHovered(false)}
         className="fixed left-0 top-0 h-full w-80 z-50"
       >
-        <div className="h-full glass-panel m-4 p-6 overflow-y-auto">
+        <div className="h-full bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 backdrop-blur-2xl border-r-4 border-purple-200 m-4 p-6 overflow-y-auto rounded-2xl shadow-2xl">
           {/* Team Section */}
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
-              <Users className="w-5 h-5 text-purple-400" />
-              <h3 className="text-lg font-semibold text-white">Team Status</h3>
+              <Users className="w-5 h-5 text-purple-600" />
+              <h3 className="text-lg font-semibold text-gray-900">Team Status</h3>
             </div>
             
             <div className="space-y-3">
@@ -48,16 +48,16 @@ const LeftPeekPanel = () => {
                 <motion.div
                   key={member.id}
                   whileHover={{ scale: 1.02, x: 4 }}
-                  className="glass-panel-hover p-3 cursor-pointer"
+                  className="bg-white/80 backdrop-blur-xl border border-gray-200 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center gap-3">
                     <div className="text-2xl">{member.avatar}</div>
                     <div className="flex-1">
-                      <div className="font-medium text-white text-sm">{member.name}</div>
-                      <div className="text-xs text-zinc-400">{member.role}</div>
+                      <div className="font-medium text-gray-900 text-sm">{member.name}</div>
+                      <div className="text-xs text-gray-600">{member.role}</div>
                     </div>
                     <div className={`w-2 h-2 rounded-full ${
-                      member.status === 'online' ? 'bg-green-400' : 'bg-yellow-400'
+                      member.status === 'online' ? 'bg-green-500' : 'bg-yellow-500'
                     }`} />
                   </div>
                 </motion.div>
@@ -68,8 +68,8 @@ const LeftPeekPanel = () => {
           {/* AI Shortcuts */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="w-5 h-5 text-blue-400" />
-              <h3 className="text-lg font-semibold text-white">AI Assistant</h3>
+              <Sparkles className="w-5 h-5 text-blue-600" />
+              <h3 className="text-lg font-semibold text-gray-900">AI Assistant</h3>
             </div>
             
             <div className="grid grid-cols-2 gap-3">
@@ -78,10 +78,10 @@ const LeftPeekPanel = () => {
                   key={shortcut.action}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="glass-panel-hover p-4 flex flex-col items-center gap-2"
+                  className="bg-white/80 backdrop-blur-xl border border-gray-200 rounded-xl p-3 flex flex-col items-center gap-2 hover:shadow-md transition-shadow"
                 >
-                  <shortcut.icon className="w-6 h-6 text-purple-400" />
-                  <span className="text-xs text-white text-center">{shortcut.label}</span>
+                  <shortcut.icon className="w-6 h-6 text-purple-600" />
+                  <span className="text-xs text-gray-700 text-center">{shortcut.label}</span>
                 </motion.button>
               ))}
             </div>
@@ -90,14 +90,14 @@ const LeftPeekPanel = () => {
           {/* Quick Chat */}
           <div className="mt-8">
             <div className="flex items-center gap-2 mb-4">
-              <MessageSquare className="w-5 h-5 text-green-400" />
-              <h3 className="text-lg font-semibold text-white">Quick Chat</h3>
+              <MessageSquare className="w-5 h-5 text-green-600" />
+              <h3 className="text-lg font-semibold text-gray-900">Quick Chat</h3>
             </div>
-            <div className="glass-panel p-4">
+            <div className="bg-white/80 backdrop-blur-xl border border-gray-200 rounded-xl p-4 shadow-sm">
               <input
                 type="text"
                 placeholder="Message team..."
-                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-purple-400"
+                className="w-full bg-gray-50 border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
               />
             </div>
           </div>

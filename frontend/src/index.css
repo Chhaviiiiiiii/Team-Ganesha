@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './styles/custom.css';
-
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

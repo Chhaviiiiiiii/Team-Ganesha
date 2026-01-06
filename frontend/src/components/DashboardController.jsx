@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import DashboardView from './views/DashboardView'
+import OverviewPage from './views/OverviewPage'
 import AnalyticsView from './views/AnalyticsView'
 import AlertsView from './views/AlertsView'
-import OperationsView from './views/OperationsView'
 
-const DashboardController = ({ currentView, setCurrentView }) => {
+const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) => {
   const [dashboardData, setDashboardData] = useState(null)
 
   useEffect(() => {
@@ -33,40 +32,32 @@ const DashboardController = ({ currentView, setCurrentView }) => {
 
   const renderView = () => {
     switch (currentView) {
-      case 'dashboard':
-        return <DashboardView data={dashboardData} />
-      case 'analytics':
-        return <AnalyticsView />
+      case 'overview':
+        return <OverviewPage setSelectedZone={setSelectedZone} />
+      case 'heatmap':
+        return <div className="p-6 text-white">Live Heatmap View - Coming Soon</div>
       case 'alerts':
         return <AlertsView />
-      case 'operations':
-        return <OperationsView />
+      case 'rfid':
+        return <div className="p-6 text-white">RFID Registry - Coming Soon</div>
+      case 'analytics':
+        return <AnalyticsView />
+      case 'settings':
+        return <div className="p-6 text-white">System Settings - Coming Soon</div>
       default:
-        return <DashboardView data={dashboardData} />
+        return <OverviewPage setSelectedZone={setSelectedZone} />
     }
   }
 
   return (
-    <div className="flex-1 p-8 overflow-auto pb-32">
-      {/* Header */}
-      <motion.div
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="mb-8"
-      >
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-          Kumbh Sava Control System
-        </h1>
-        <p className="text-zinc-400 mt-2">Mission-critical dashboard • Real-time monitoring</p>
-      </motion.div>
-
+    <div className="flex-1 overflow-auto">
       {/* View Container with smooth transitions */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentView}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
           {renderView()}
