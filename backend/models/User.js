@@ -9,8 +9,12 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true
+  },
+  phoneNumber: {
+    type: String,
+    unique: true,
+    sparse: true
   },
   password: {
     type: String,
@@ -18,7 +22,18 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'operator', 'viewer'],
+    enum: [
+      'admin', 
+      'operator', 
+      'viewer',
+      'LIVE_MANAGEMENT',
+      'RFID_REGISTRY',
+      'ALERTS_EMERGENCY',
+      'POLICE_DASHBOARD',
+      'MEDICAL_DASHBOARD',
+      'OPERATOR_STAFF',
+      'PUBLIC_PILGRIM'
+    ],
     default: 'viewer'
   },
   avatar: String,

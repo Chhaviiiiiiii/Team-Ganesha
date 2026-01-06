@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import OverviewPage from './views/OverviewPage'
 import AnalyticsView from './views/AnalyticsView'
 import AlertsView from './views/AlertsView'
+import UserPermissionsView from './views/UserPermissionsView'
 
 const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) => {
   const [dashboardData, setDashboardData] = useState(null)
@@ -44,6 +45,8 @@ const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) =
         return <AnalyticsView />
       case 'settings':
         return <div className="p-6 text-white">System Settings - Coming Soon</div>
+      case 'users':
+        return <UserPermissionsView />
       default:
         return <OverviewPage setSelectedZone={setSelectedZone} />
     }

@@ -1,14 +1,53 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import CommandSidebar from './components/CommandSidebar'
 import CommandHeader from './components/CommandHeader'
 import DashboardController from './components/DashboardController'
 import ZoneDetailPanel from './components/ZoneDetailPanel'
+import LoginPage from './components/LoginPage'
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [currentUser, setCurrentUser] = useState(null)
   const [currentView, setCurrentView] = useState('overview')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [selectedZone, setSelectedZone] = useState(null)
+
+  // Check authentication on mount
+  useEffect(() => {
+    const authStatus = localStorage.getItem('isAuthenticated')
+    const userRole = localStorage.getItem('userRole')
+    const userName = localStorage.getItem('userName')
+    const userPhone = localStorage.getItem('userPhone')
+    
+    if (authStatus === 'true') {
+      setIsAuthenticated(true)
+      setCurrentUser({
+        role: userRole,
+        name: userName,
+        phone: userPhone
+      })
+    }
+  }, [])
+
+  const handleLogin = (userData) => {
+    setIsAuthenticated(true)
+    setCurrentUser(userData)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated')
+    localStorage.removeItem('userRole')
+    localStorage.removeItem('userName')
+    localStorage.removeItem('userPhone')
+    setIsAuthenticated(false)
+    setCurrentUser(null)
+  }
+
+  // Show login page if not authenticated
+  if (!isAuthenticated) {
+    return <LoginPage onLogin={handleLogin} />
+  }
 
   return (
     <div className="h-screen w-screen bg-slate-950 overflow-hidden flex">
@@ -26,7 +65,7 @@ function App() {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
         {/* Top Command Header */}
-        <CommandHeader />
+        <CommandHeader currentUser={currentUser} onLogout={handleLogout} />
         
         {/* Main Dashboard Content */}
         <motion.div

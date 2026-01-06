@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Clock, Wifi, Shield, User, Circle } from 'lucide-react'
+import { Clock, Wifi, Shield, User, Circle, LogOut } from 'lucide-react'
 
-const CommandHeader = () => {
+const CommandHeader = ({ currentUser, onLogout }) => {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [systemHealth, setSystemHealth] = useState('operational') // operational, degraded, critical
 
@@ -87,12 +87,19 @@ const CommandHeader = () => {
       {/* Right: User Info */}
       <div className="flex items-center gap-3">
         <div className="text-right">
-          <div className="text-sm text-white font-medium">Control Officer</div>
-          <div className="text-xs text-slate-500">Admin Authority</div>
+          <div className="text-sm text-white font-medium">{currentUser?.name || 'Super Admin'}</div>
+          <div className="text-xs text-slate-500">{currentUser?.role || 'Admin Authority'}</div>
         </div>
         <div className="w-10 h-10 rounded-lg bg-cyan-500/20 border border-cyan-500 flex items-center justify-center">
           <User className="w-5 h-5 text-cyan-400" />
         </div>
+        <button
+          onClick={onLogout}
+          className="ml-2 p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 transition-all group"
+          title="Logout"
+        >
+          <LogOut className="w-4 h-4 text-red-400 group-hover:text-red-300" />
+        </button>
       </div>
     </div>
   )

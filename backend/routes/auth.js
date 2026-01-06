@@ -127,4 +127,85 @@ router.get('/me', async (req, res) => {
   }
 })
 
+// Create new user (for admin use)
+router.post('/create-user', async (req, res) => {
+  try {
+    const { name, phoneNumber, password, role } = req.body
+
+    // Check if user with phone number exists
+    const existingUser = await User.findOne({ phoneNumber })
+    if (existingUser) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'User with this phone number already exists' 
+      })
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    // Create user
+    const user = new User({
+      name,
+      phoneNumber,
+      password: hashedPassword,
+      role: role || 'PUBLIC_PILGRIM',
+      email: `${phoneNumber}@temp.com` // Temporary email
+    })
+
+    await user.save()
+
+    res.status(201).json({
+      success: true,
+      message: 'User created successfully',
+      data: {
+        id: user._id,
+        name: user.name,
+        phoneNumber: user.phoneNumber,
+        role: user.role
+      }
+    })
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message })
+  }
+})
+
+// Get all users
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find()
+      .select('-password')
+      .sort({ createdAt: -1 })
+
+    res.json({
+      success: true,
+      data: users
+    })
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message })
+  }
+})
+
+// Delete user
+router.delete('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id)
+    
+    if (!user) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'User not found' 
+      })
+    }
+
+    res.json({
+      success: true,
+      message: 'User deleted successfully'
+    })
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message })
+  }
+})
+
 export default router

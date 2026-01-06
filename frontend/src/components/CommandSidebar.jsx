@@ -7,6 +7,7 @@ import {
   Radio,
   BarChart3,
   Settings,
+  Users,
   ChevronLeft,
   ChevronRight
 } from 'lucide-react'
@@ -19,6 +20,7 @@ const CommandSidebar = ({ currentView, setCurrentView, collapsed, setCollapsed }
     { id: 'rfid', icon: Radio, label: 'RFID Registry', color: 'purple' },
     { id: 'analytics', icon: BarChart3, label: 'Analytics', color: 'green' },
     { id: 'settings', icon: Settings, label: 'System Settings', color: 'gray' },
+    { id: 'users', icon: Users, label: 'User & Permissions', color: 'indigo' },
   ]
 
   return (
