@@ -4,8 +4,9 @@ import OverviewPage from './views/OverviewPage'
 import AnalyticsView from './views/AnalyticsView'
 import AlertsView from './views/AlertsView'
 import UserPermissionsView from './views/UserPermissionsView'
+import MacOSDock from './MacOSDock'
 
-const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) => {
+const DashboardController = ({ currentView, setCurrentView, setSelectedZone, onHeatmapClick }) => {
   const [dashboardData, setDashboardData] = useState(null)
 
   useEffect(() => {
@@ -66,6 +67,13 @@ const DashboardController = ({ currentView, setCurrentView, setSelectedZone }) =
           {renderView()}
         </motion.div>
       </AnimatePresence>
+
+      {/* MacOS Dock */}
+      <MacOSDock 
+        currentView={currentView} 
+        setCurrentView={setCurrentView}
+        onHeatmapClick={onHeatmapClick}
+      />
     </div>
   )
 }
